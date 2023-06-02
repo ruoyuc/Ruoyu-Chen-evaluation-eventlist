@@ -1,37 +1,3 @@
-// document
-//   .getElementById("addEventButton")
-//   .addEventListener("click", function () {
-//     const table = document.getElementById("tableBody");
-//     let row = table.insertRow(-1);
-
-//     let cell1 = row.insertCell(0);
-//     let cell2 = row.insertCell(1);
-//     let cell3 = row.insertCell(2);
-//     let cell4 = row.insertCell(3);
-
-//     let event = document.createElement("input");
-//     event.type = "text";
-//     cell1.appendChild(event);
-
-//     let startDate = document.createElement("input");
-//     startDate.type = "date";
-//     cell2.appendChild(startDate);
-
-//     let endDate = document.createElement("input");
-//     endDate.type = "date";
-//     cell3.appendChild(endDate);
-
-//     const plusBtn = document.createElement("button");
-//     plusBtn.innerHTML = "Plus";
-//     plusBtn.classList.add("plusBtn");
-//     plusBtn.addEventListener("click", function () {
-//       console.log("Event: " + event.value);
-//       console.log("Start: " + startDate.value);
-//       console.log("End: " + endDate.value);
-//     });
-
-//     cell4.appendChild(plusBtn);
-//   });
 
 // Define an API module using an IIFE (Immediately Invoked Function Expression).
 const API = (function () {
@@ -189,6 +155,7 @@ const API = (function () {
       const editBtn = document.createElement("button");
       editBtn.classList.add("editBtn");
       editBtn.textContent = "Edit";
+      editBtn.setAttribute("edit-id", todo.id);  // Set the id as a data attribute
   
       const deleteBtn = document.createElement("button");
       deleteBtn.classList.add("deleteBtn");
@@ -211,12 +178,12 @@ const API = (function () {
       this.init();
     }
   
-      // After the controller is constructed, set up event handlers and fetch the initial list of to-dos.
-      async init() {
-        this.setUpEvents();
-        await this.model.fetchTodos();
-        this.view.initRenderTodos(this.model.getTodos());
-      }
+    //   // After the controller is constructed, set up event handlers and fetch the initial list of to-dos.
+    //   async init() {
+    //     this.setUpEvents();
+    //     await this.model.fetchTodos();
+    //     this.view.initRenderTodos(this.model.getTodos());
+    //   }
   
     // Setup events
     setUpEvents() {
@@ -246,6 +213,59 @@ const API = (function () {
   
    
   
+    // handleAddEvent() {
+    //   const table = document.getElementById("tableBody");
+    //   let row = table.insertRow(-1);
+  
+    //   let cell1 = row.insertCell(0);
+    //   let cell2 = row.insertCell(1);
+    //   let cell3 = row.insertCell(2);
+    //   let cell4 = row.insertCell(3);
+  
+    //   let event = document.createElement("input");
+    //   event.type = "text";
+    //   cell1.appendChild(event);
+  
+    //   let startDate = document.createElement("input");
+    //   startDate.type = "date";
+    //   cell2.appendChild(startDate);
+  
+    //   let endDate = document.createElement("input");
+    //   endDate.type = "date";
+    //   cell3.appendChild(endDate);
+  
+    //   const plusBtn = document.createElement("button");
+    //   plusBtn.innerHTML = "Plus";
+    //   plusBtn.classList.add("plusBtn");
+  
+    //   plusBtn.addEventListener("click", () => {
+    //     const newTodo = {
+    //       eventName: event.value,
+    //       startDate: startDate.value,
+    //       endDate: endDate.value,
+    //     };
+  
+    //     console.log(newTodo);
+  
+    //     this.model.addTodo(newTodo).then((todo) => {
+    //       this.view.appendTodo(todo);
+    //       // remove the input fields or input line
+    //       row.remove();
+    //     });
+    //   });
+
+    //   const xBtn = document.createElement("button");
+    //   xBtn.innerHTML = "X";
+    //   xBtn.classList.add("xBtn");
+
+    //   xBtn.addEventListener("click", () => {
+    //     row.remove();
+    //   });
+
+    //   cell4.appendChild(plusBtn);
+    //   cell4.appendChild(xBtn);
+    // }
+
     handleAddEvent() {
       const table = document.getElementById("tableBody");
       let row = table.insertRow(-1);
@@ -272,6 +292,12 @@ const API = (function () {
       plusBtn.classList.add("plusBtn");
   
       plusBtn.addEventListener("click", () => {
+        // Validation: Check if any field is empty
+        if (!event.value || !startDate.value || !endDate.value) {
+          alert("Invalid Input: Please fill all fields.");
+          return;
+        }
+  
         const newTodo = {
           eventName: event.value,
           startDate: startDate.value,
@@ -287,10 +313,110 @@ const API = (function () {
         });
       });
   
+      const xBtn = document.createElement("button");
+      xBtn.innerHTML = "X";
+      xBtn.classList.add("xBtn");
+  
+      xBtn.addEventListener("click", () => {
+        row.remove();
+      });
+  
       cell4.appendChild(plusBtn);
+      cell4.appendChild(xBtn);
     }
   
+
+
+
+
   
+    // Add the button event listener for edit button
+    setUpEditEvent() {
+      this.view.todolist.addEventListener("click", (e) => {
+        if (e.target.classList.contains("editBtn")) {
+          //const id = e.target.parentNode.id.replace("todo-", "");
+          const eidtId = e.target.getAttribute("edit-id"); // Retrieve the id
+          const row = e.target.parentNode.parentNode;
+          const oldTitle = row.children[0].innerText;
+          const oldStartDate = row.children[1].innerText;
+          const oldEndDate = row.children[2].innerText;
+          console.log
+          this.model
+            .removeTodo(eidtId)
+            .then(() => this.view.removeTodo(eidtId))
+            .catch((error) => console.log(error));
+          this.addEditableRow(oldTitle, oldStartDate, oldEndDate, eidtId);
+        }
+      });
+    }
+  
+    addEditableRow(title, startDate, endDate, id) {
+      const table = document.getElementById("tableBody");
+      let row = table.insertRow(-1);
+  
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      let cell3 = row.insertCell(2);
+      let cell4 = row.insertCell(3);
+  
+      let event = document.createElement("input");
+      event.type = "text";
+      event.value = title;
+      cell1.appendChild(event);
+  
+      let start = document.createElement("input");
+      start.type = "date";
+      start.value = startDate;
+      cell2.appendChild(start);
+  
+      let end = document.createElement("input");
+      end.type = "date";
+      end.value = endDate;
+      cell3.appendChild(end);
+  
+      const saveBtn = document.createElement("button");
+      saveBtn.innerHTML = "Save";
+      saveBtn.classList.add("saveBtn");
+      saveBtn.addEventListener("click", () => {
+        const newTodo = {
+          eventName: event.value,
+          startDate: start.value,
+          endDate: end.value,
+          id: id,
+        };
+        this.model.addTodo(newTodo).then((todo) => {
+          this.view.appendTodo(todo);
+          row.remove();
+        });
+      });
+  
+      const cancelBtn = document.createElement("button");
+      cancelBtn.innerHTML = "Cancel";
+      cancelBtn.classList.add("cancelBtn");
+      cancelBtn.addEventListener("click", () => {
+        const oldTodo = {
+          eventName: title,
+          startDate: startDate,
+          endDate: endDate,
+          id: id,
+        };
+        this.model.addTodo(oldTodo).then((todo) => {
+          this.view.appendTodo(todo);
+          row.remove();
+        });
+      });
+  
+      cell4.appendChild(saveBtn);
+      cell4.appendChild(cancelBtn);
+    }
+  
+    // Initialize the controller.
+    async init() {
+      this.setUpEvents();
+      this.setUpEditEvent();
+      await this.model.fetchTodos();
+      this.view.initRenderTodos(this.model.getTodos());
+    }
   }
   
   // Create a new model, view, and controller for the to-do list.
