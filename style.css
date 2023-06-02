@@ -1,0 +1,33 @@
+:root {
+    --tan: #e6e2d3;
+    --traffic-white: #f0f0f0;
+    --yellow-green: #4caf50;
+    --vermillion-red: #c94c4c;
+    --blue: #008cba;
+  }
+
+
+#addEventButton {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    /* //align-items: center; */
+    /* height: 100vh; */
+  }
+
+.title{
+  font-size: large;
+}
+  
