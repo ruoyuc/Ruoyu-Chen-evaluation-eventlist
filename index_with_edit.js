@@ -230,22 +230,6 @@ const API = (function () {
         .addEventListener("click", this.handleAddEvent.bind(this));
     }
   
-    // Add the button event listener for delete button
-    // setUpDeleteEvent() {
-    //     this.view.todolist.addEventListener("click", (event) => {
-    //       const isDeleteBtn = event.target.classList.contains("deleteBtn"); //Attention!!!!
-    //       if (isDeleteBtn) {
-    //         const removeId = event.target.getAttribute("remove-id");
-    //         this.model
-    //           .removeTodo(removeId)
-    //           .then(() => {
-    //             this.view.removeTodo(removeId);
-    //           })
-    //           .catch((error) => console.log(error));
-    //       }
-    //     });
-    //   }
-  
     setUpDeleteEvent() {
       this.view.todolist.addEventListener("click", (event) => {
         const isDeleteBtn = event.target.classList.contains("deleteBtn");
@@ -303,8 +287,17 @@ const API = (function () {
           row.remove();
         });
       });
-  
-      cell4.appendChild(plusBtn);
+
+      const xBtn = document.createElement("button");
+      xBtn.innerHTML = "X";
+      xBtn.classList.add("xBtn");
+      xBtn.addEventListener("click", () => {
+        row.remove();
+      });
+
+
+
+      cell4.appendChild(plusBtn, xBtn);
     }
   
     // Add the button event listener for edit button
