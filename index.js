@@ -103,9 +103,6 @@ const API = (function () {
   class TodoView {
     // When the view is constructed, get references to the form and list in the HTML.
     constructor() {
-      // this.form = document.querySelector(".todo-app__form");
-      // this.input = document.getElementById("todo-app__input");
-      // this.todolist = document.querySelector(".todolist");
       this.todolist = document.getElementById("tableBody");
     }
   
@@ -159,7 +156,7 @@ const API = (function () {
   
       const deleteBtn = document.createElement("button");
       deleteBtn.classList.add("deleteBtn");
-      deleteBtn.textContent = "Delete";
+      deleteBtn.textContent = "Del";
       deleteBtn.setAttribute("remove-id", todo.id); // Set the id as a data attribute
   
       actions.append(editBtn, deleteBtn);
@@ -177,13 +174,6 @@ const API = (function () {
       this.view = view;
       this.init();
     }
-  
-    //   // After the controller is constructed, set up event handlers and fetch the initial list of to-dos.
-    //   async init() {
-    //     this.setUpEvents();
-    //     await this.model.fetchTodos();
-    //     this.view.initRenderTodos(this.model.getTodos());
-    //   }
   
     // Setup events
     setUpEvents() {
@@ -211,61 +201,6 @@ const API = (function () {
       });
     }
   
-   
-  
-    // handleAddEvent() {
-    //   const table = document.getElementById("tableBody");
-    //   let row = table.insertRow(-1);
-  
-    //   let cell1 = row.insertCell(0);
-    //   let cell2 = row.insertCell(1);
-    //   let cell3 = row.insertCell(2);
-    //   let cell4 = row.insertCell(3);
-  
-    //   let event = document.createElement("input");
-    //   event.type = "text";
-    //   cell1.appendChild(event);
-  
-    //   let startDate = document.createElement("input");
-    //   startDate.type = "date";
-    //   cell2.appendChild(startDate);
-  
-    //   let endDate = document.createElement("input");
-    //   endDate.type = "date";
-    //   cell3.appendChild(endDate);
-  
-    //   const plusBtn = document.createElement("button");
-    //   plusBtn.innerHTML = "Plus";
-    //   plusBtn.classList.add("plusBtn");
-  
-    //   plusBtn.addEventListener("click", () => {
-    //     const newTodo = {
-    //       eventName: event.value,
-    //       startDate: startDate.value,
-    //       endDate: endDate.value,
-    //     };
-  
-    //     console.log(newTodo);
-  
-    //     this.model.addTodo(newTodo).then((todo) => {
-    //       this.view.appendTodo(todo);
-    //       // remove the input fields or input line
-    //       row.remove();
-    //     });
-    //   });
-
-    //   const xBtn = document.createElement("button");
-    //   xBtn.innerHTML = "X";
-    //   xBtn.classList.add("xBtn");
-
-    //   xBtn.addEventListener("click", () => {
-    //     row.remove();
-    //   });
-
-    //   cell4.appendChild(plusBtn);
-    //   cell4.appendChild(xBtn);
-    // }
-
     handleAddEvent() {
       const table = document.getElementById("tableBody");
       let row = table.insertRow(-1);
@@ -288,7 +223,7 @@ const API = (function () {
       cell3.appendChild(endDate);
   
       const plusBtn = document.createElement("button");
-      plusBtn.innerHTML = "Plus";
+      plusBtn.innerHTML = "Add";
       plusBtn.classList.add("plusBtn");
   
       plusBtn.addEventListener("click", () => {
@@ -391,7 +326,7 @@ const API = (function () {
       });
   
       const cancelBtn = document.createElement("button");
-      cancelBtn.innerHTML = "Cancel";
+      cancelBtn.innerText = "X";
       cancelBtn.classList.add("cancelBtn");
       cancelBtn.addEventListener("click", () => {
         const oldTodo = {

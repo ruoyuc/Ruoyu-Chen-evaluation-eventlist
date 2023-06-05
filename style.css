@@ -1,33 +1,131 @@
 :root {
-    --tan: #e6e2d3;
-    --traffic-white: #f0f0f0;
-    --yellow-green: #4caf50;
-    --vermillion-red: #c94c4c;
-    --blue: #008cba;
-  }
+  --tan: #e6e2d3;
+  --traffic-white: #f0f0f0;
+  --yellow-green: #4caf50;
+  --vermillion-red: #c94c4c;
+  --blue: #008cba;
+}
 
 
 #addEventButton {
-    background-color: var(--blue);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: 0.3s;
-  }
+  background-color: var(--blue);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
 
 
 .center {
-    display: flex;
-    justify-content: center;
-    /* //align-items: center; */
-    /* height: 100vh; */
-  }
+  display: flex;
+  justify-content: center;
+  /* //align-items: center; */
+  /* height: 100vh; */
+}
 
-.title{
+.title {
   font-size: large;
 }
+
+#tableContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#eventTable {
+  width: 80%;
+  height: 100%;
+  /* border-collapse: collapse; */
+  border: 3px solid var(--tan);
+  text-align: center;
+  border-radius: 5px;
   
+  margin: 10px auto; /* Adds margin to the whole table */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0);
+  
+}
+
+tbody tr {
+  background-color: var(--tan);
+  
+ 
+}
+
+.editBtn {
+  background: var(--blue);
+  width: 40px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 2px;
+  fill: white;
+  
+
+}
+
+.deleteBtn{
+  background: var(--vermillion-red);
+  width: 40px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 2px;
+  fill: white;
+}
+.plusBtn{
+  background: var(--blue);
+  width: 40px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 2px;
+  fill: white;
+}
+
+.white-icon {
+  color: white;
+}
+
+.cancelBtn{
+  background: var(--vermillion-red);
+  width: 40px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 2px;
+  fill: white;
+  
+}
+.saveBtn{
+  background: var(--blue);
+  width: 40px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 2px;
+  fill: white;
+}
+
+.xBtn{
+  background: var(--vermillion-red);
+  width: 40px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 2px;
+  fill: white;
+}
